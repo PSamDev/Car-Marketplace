@@ -11,3 +11,10 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user}'s Profile"
     
+class Location(models.Model):
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=50)
+    local_governemt_area = models.CharField(max_length=50)
+    address = models.CharField(max_length=50)
+
+    
