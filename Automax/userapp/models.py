@@ -12,13 +12,16 @@ class Location(models.Model):
     zip_code = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
 
+    def __str__(self):
+        return f"{self.state}"
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_image = models.ImageField(null=True, blank=True, upload_to=None, height_field=None, width_field=None, max_length=None)
     bio = models.CharField(max_length=500, blank=True, null=True)
     phone_number = models.CharField(max_length=11, blank=True, null=True)
-    location = models.OneToOneField(Location, on_delete=models.CASCADE, blank=True)
+    # location = models.OneToOneField(Location, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return f"{self.user}'s Profile"
