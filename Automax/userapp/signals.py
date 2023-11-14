@@ -9,6 +9,8 @@ def create_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user = instance)
 
 @receiver(post_save, sender = Profile)
-def create_user_location(sender, instance, created, **kwargs):
+def create_profile_location(sender, instance, created, **kwargs):
     if created:
-        Location.objects.create(profile=instance)
+        profile_location = Location.objects.create()
+        instance.location = profile_location
+        instance.save()
