@@ -23,7 +23,7 @@
                         {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
                         <a class="nav-link active" aria-current="page" href="{% url 'welcome' %}">Home</a>
                         {% comment %} {% else %} {% endcomment %}
-                        <a class="nav-link">Login</a>
+                        <a href = "{% url "login" %}" class="nav-link">Login</a>
                         {% comment %} {% endif %} {% endcomment %}
                     </nav>
                 </div>
