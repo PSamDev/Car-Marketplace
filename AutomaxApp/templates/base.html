@@ -4,12 +4,13 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {% block title %}
         <title>{{name}}</title>
+        {% endblock title %}
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.min.css"%}">
         <link rel="stylesheet" href="{% static "bootstrap/dist/css/style.css"%}">
-        
     </head>
     <body>
         {% block content %}
