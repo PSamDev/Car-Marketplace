@@ -21,7 +21,7 @@
                     <h3 class="float-md-start mb-0">AutoMax</h3>
                     <nav class="nav nav-masthead justify-content-center float-md-end">
                         {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
-                        <a class="nav-link active" aria-current="page" href="{% url 'welcome' %}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         {% comment %} {% else %} {% endcomment %}
                         <a href = "{% url "login" %}" class="nav-link">Login</a>
                         {% comment %} {% endif %} {% endcomment %}
