@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 <title>Automax Home</title>
@@ -14,10 +15,13 @@
                 <p class = "lead text-muted">
                     The very best place to buy or sell cars affordably. Communicate with reliable sellers and get the best cars ever
                 </p>
-                <a class = "btn btn-primary my-2" href="#">List your car</a>
+                <a class = "btn btn-primary my-2" href="{% url "list_form"%}">List your car</a>
             </div>
             <div class="col-lg-6 col-md-8 mx-auto">
-                <!--Filter cars by brand and transmission-->
+                <form method="get">
+                    {{listingfilter.form|crispy}}
+                    <input type="Submit" value="Filter" class="btn btn-primary">
+                </form>
             </div>
         </div>
     </section>
@@ -25,7 +29,7 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class = "row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {% for listing in listing  %}
+                {% for listing in listingfilter.qs|dictsortreversed:"updated_time"  %}
                 <div class = "col">
                     {% include "listing.html" %}
                 </div>
@@ -38,9 +42,4 @@
 
 {% endblock content %}
 
-
-
-{% block footer %}
-
-{% endblock footer %}
 

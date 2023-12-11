@@ -8,6 +8,7 @@ cycler==0.12.1
 Django==4.2.6
 django-bootstrap4==23.2
 django-crispy-forms==2.1
+django-filter==23.5
 django-localflavor==4.0
 fabio==2023.10.0
 fonttools==4.44.3
