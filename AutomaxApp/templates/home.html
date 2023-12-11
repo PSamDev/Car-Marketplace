@@ -6,9 +6,38 @@
 {% endblock title %}
 
 {% block content %}
-<h1>Home Page {{ request.user.username }}</h1>
+<main>
+    <section class="py-5 container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Welcome to Automax {{ request.user.username }}</h1>
+                <p class = "lead text-muted">
+                    The very best place to buy or sell cars affordably. Communicate with reliable sellers and get the best cars ever
+                </p>
+                <a class = "btn btn-primary my-2" href="#">List your car</a>
+            </div>
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <!--Filter cars by brand and transmission-->
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class = "row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for cars in listing  %}
+                <div class = "col">
+                    <p>{{cars.model}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+
 
 {% endblock content %}
+
 
 
 {% block footer %}

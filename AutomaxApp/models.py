@@ -12,6 +12,7 @@ class Listing(models.Model):
     seller = models.ForeignKey(Profile, on_delete=models.CASCADE)
     brand = models.CharField(max_length=50, default=None, choices=constants.CAR_BRANDS)
     model = models.CharField(max_length=150, default=None)
+    year = models.CharField(max_length=150, default=None)
     chassis_number = models.CharField(max_length=50, default=None)
     mileage = models.IntegerField(default=0)
     color = models.CharField(max_length=50, default="White")
@@ -20,3 +21,7 @@ class Listing(models.Model):
     transmission = models.CharField(max_length=50, default=None, choices=constants.TRANSMISSION)
     location = models.OneToOneField(Location, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(upload_to=utils.user_listing_path, max_length=None, default=None)
+    price = models.CharField(max_length=150, default=None)
+
+    def __str__(self):
+        return f"{self.seller.user.username} - {self.model} {self.color}"
