@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .utils import user_directory_path
 
 #Download django localflavor to have access to autodetection of states, zip_code etc. Load on the settings.py file too
 # from localflavor.us.models import USPostalCodeField, USStateField, USSocialSecurityNumberField, USZipCodeField
@@ -24,7 +25,7 @@ class Location(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.ImageField(null=True, blank=True, upload_to='profiles/')  # Set upload_to directory
+    profile_image = models.ImageField(null=True, blank=True, upload_to=user_directory_path)
     bio = models.CharField(max_length=500, blank=True, null=True)
     phone_number = models.CharField(max_length=11, blank=True, null=True)
     location = models.OneToOneField(Location, on_delete=models.SET_NULL, null=True, blank=True)
