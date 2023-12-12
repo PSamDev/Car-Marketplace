@@ -6,6 +6,7 @@ from . forms import ListForm
 from userapp.forms import LocationForm
 from django.contrib import messages
 from .filters import ListingFilter
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def welcome(request):
@@ -14,8 +15,22 @@ def welcome(request):
 @login_required
 def home(request):
     listing = Listing.objects.all()
+    items_per_page = 6 
+
+    #fix pagination
+    paginator = Paginator(listing, items_per_page)
+    page = request.GET.get('page')
+
+    try:
+        listing_page = paginator.page(page)
+    except PageNotAnInteger:
+        listing_page = paginator.page(1)
+    except EmptyPage:
+        listing_page = paginator.page(paginator.num_pages)
+                                      
     listingfilter = ListingFilter(request.GET, queryset=listing)
-    context = {"listingfilter":listingfilter}
+    context = {"listingfilter":listingfilter, "listing_page":listing_page}
+
     return render(request, "home.html", context)
 
 @login_required
@@ -41,3 +56,15 @@ def list_form(request):
         listingform = ListForm()
         locationform=LocationForm()
         return render (request, "list_form.html", {"listform":listingform, "locationform":locationform})
+    
+@login_required
+def carinfo(request, id):
+   try:
+       carinfo=Listing.objects.get(id=id)
+       if carinfo == None:
+           raise Exception
+       return render(request, "carinfo.html", {"carinfo":carinfo})
+   except Exception as e:
+       messages.error(request, f"Invalid UUID {id} provided")
+       return redirect("home")
+   
