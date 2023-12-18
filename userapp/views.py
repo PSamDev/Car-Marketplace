@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views import View
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 class Register(View):
@@ -48,3 +49,9 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("welcome")
+
+@method_decorator(login_required, name="dispatch")
+class ProfileView(View):
+
+    def get(self, request):
+        return render(request, "profile.html", {})
