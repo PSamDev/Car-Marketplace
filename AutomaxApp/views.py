@@ -1,3 +1,4 @@
+from imp import reload
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -68,3 +69,35 @@ def carinfo(request, id):
        messages.error(request, f"Invalid UUID {id} provided")
        return redirect("home")
    
+@login_required
+def edit(request, id):
+    try:
+        listing = Listing.objects.get(id=id)
+        if listing is None:
+            raise Exception
+        if request.method == 'POST':
+            listing_form = ListForm(
+                request.POST, request.FILES, instance=listing)
+            location_form = LocationForm(
+                request.POST, instance=listing.location)
+            if listing_form.is_valid and location_form.is_valid:
+                listing_form.save()
+                location_form.save()
+                messages.info(request, f'Listing {id} updated successfully!')
+                return redirect('home')
+            else:
+                messages.error(
+                    request, f'An error occured while trying to edit the listing.')
+                return reload()
+        else:
+            listing_form = ListForm(instance=listing)
+            location_form = LocationForm(instance=listing.location)
+        context = {
+            'location_form': location_form,
+            'listing_form': listing_form
+        }
+        return render(request, 'edit.html', context)
+    except Exception as e:
+        messages.error(
+            request, f'An error occured while trying to access the edit page.')
+        return redirect('home')
