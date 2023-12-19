@@ -3,14 +3,8 @@ from .models import Location, Profile
 from .widgets import CustomPictureImageFieldWidget
 from django.contrib.auth.models import User
 
-class LocationForm(forms.ModelForm):
-
-    class Meta:
-        model = Location
-        fields = {"state", "city", "zip_code", "address"}
-
 class ProfileForm(forms.ModelForm):
-    photo = forms.ImageField(widget=CustomPictureImageFieldWidget)
+    profile_image = forms.ImageField(widget=CustomPictureImageFieldWidget)
     bio = forms.TextInput()
 
     class Meta:
@@ -23,3 +17,9 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
+
+class LocationForm(forms.ModelForm):
+
+    class Meta:
+        model = Location
+        fields = {"state", "city", "zip_code", "address"}
