@@ -20,7 +20,7 @@ class Register(View):
             user = register_form.save()
             user.refresh_from_db()
             login(request, user)
-            messages.success(request, f"User {user.username} created successfully")
+            messages.success(request, f"User {user.username} created successfully | Please Update your profile and add a profile picture for your listings to be published")
             return redirect("home")
         else:
             messages.error(request, f"Error trying to Register new user")
@@ -36,7 +36,7 @@ def login_view(request):
             print(user)
             if user is not None:
                 login(request, user)
-                messages.success(request, f"You are successfully logged in as { username }")
+                messages.success(request, f"You are successfully logged in as { username } | Please Update your profile and add a profile picture(If you've not done so) for your listings to be published")
                 return redirect("home")
             else:
                 pass
