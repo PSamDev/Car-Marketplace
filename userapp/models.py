@@ -27,8 +27,10 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_image = models.ImageField(null=True, blank=True, upload_to=user_directory_path)
     bio = models.CharField(max_length=500, blank=True, null=True)
+    whatsapp_number = models.CharField(max_length=11, blank=True, null=True)
     phone_number = models.CharField(max_length=11, blank=True, null=True)
     location = models.OneToOneField(Location, on_delete=models.SET_NULL, null=True, blank=True)
+    email = models.EmailField(blank = True, max_length=254)
 
     def __str__(self):
         return f"{self.user}'s Profile"

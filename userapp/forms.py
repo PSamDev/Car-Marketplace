@@ -9,14 +9,14 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = {"profile_image", "bio", "phone_number"}
+        fields = {"profile_image", "bio", "phone_number", "whatsapp_number", "email"}
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(disabled=True)
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('username', 'first_name', 'last_name')
 
 class LocationForm(forms.ModelForm):
 

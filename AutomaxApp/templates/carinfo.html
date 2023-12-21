@@ -68,9 +68,9 @@
                                     <li>{{ carinfo.location.city }}, {{ carinfo.location.state }},
                                         {{carinfo.location.zip_code }} </li>
                                 </ul>
-                                <button
-                                    class="w-100 btn btn-lg btn-outline-primary my-3">{{carinfo.seller.phone_number}}</button>
-                                <button id="sendEmail" class="w-100 btn btn-lg btn-outline-primary">Send Email</button>
+                                <button id="sendEmail" class="w-100 btn btn-lg btn-outline-primary"><a href= "https://wa.me/{{carinfo.seller.whatsapp_number}}" style="text-decoration:none">Chat on WhatsApp</a></button>
+                                <button class="w-100 btn btn-lg btn-outline-primary my-3">{{carinfo.seller.phone_number}}</button>
+                                <button id="sendEmail" class="w-100 btn btn-lg btn-outline-primary"><a href = "mailto:{{carinfo.seller.email}}"> Send Email </a></button>    
                             </div>
                         </div>
                     </div>
