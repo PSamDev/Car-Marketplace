@@ -18,6 +18,15 @@
                 {{ login_form | crispy }}
                 <input type="Submit" value= "Login" class="w=100 btn btn-dark">
             </form>
+
+            <hr>
+            <p><a href="{% url "password_reset" %}">Forgotten your password?</a></p>
+            <hr>
+            <h5>Are You New to AutoMax? 
+                <a href = "{% url "register"%}">Click to SignUp</a>
+            </h5>
+            <hr>
+
             <div>
                 <p>Copyright © {% now 'Y' %} <a href="" class="text-dark">AutoMax</a> by <a href="https://Automax.com"
                 class="text-dark">Automax.com</a></p>
