@@ -9,6 +9,7 @@ from django.contrib import messages
 from .filters import ListingFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
+from django.core.mail import send_mail
 
 # Create your views here.
 def welcome(request):
@@ -118,3 +119,21 @@ def like_listing_view(request, id):
     return JsonResponse({
         'is_liked_by_user': created,
     })
+
+@login_required
+def inquire_listing_using_email(request, id):
+    listing = get_object_or_404(Listing, id=id)
+    try:
+        emailSubject = f'{request.user.username} is interested in {listing.model}'
+        emailMessage = f'Hi {listing.seller.user.username}, {request.user.username} is interested in your {listing.model} listing on AutoMax'
+        send_mail(emailSubject, emailMessage, 'noreply@automax.com',
+                  [listing.seller.user.email, ], fail_silently=True)
+        return JsonResponse({
+            "success": True,
+        })
+    except Exception as e:
+        print(e)
+        return JsonResponse({
+            "success": False,
+            "info": e,
+        })
