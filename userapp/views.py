@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from AutomaxApp.models import Listing, LikedListing
+from AutomaxApp.models import Listing
 from .forms import LocationForm, ProfileForm, UserForm
 
 # Create your views here.
@@ -57,21 +57,16 @@ class ProfileView(View):
 
     def get(self, request):
         user_listings = Listing.objects.filter(seller=request.user.profile)
-        user_liked_listings = LikedListing.objects.filter(
-            profile=request.user.profile).all()
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
         location_form = LocationForm(instance=request.user.profile.location)
         return render(request, 'profile.html', {'user_form': user_form,
                                                       'profile_form': profile_form,
                                                       'location_form': location_form,
-                                                      'user_listings': user_listings,
-                                                      'user_liked_listings': user_liked_listings, })
+                                                      'user_listings': user_listings,})
 
     def post(self, request):
         user_listings = Listing.objects.filter(seller=request.user.profile)
-        user_liked_listings = LikedListing.objects.filter(
-            profile=request.user.profile).all()
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(
             request.POST, request.FILES, instance=request.user.profile)
@@ -88,5 +83,4 @@ class ProfileView(View):
         return render(request, 'profile.html', {'user_form': user_form,
                                                       'profile_form': profile_form,
                                                       'location_form': location_form,
-                                                      'user_listings': user_listings,
-                                                      'user_liked_listings': user_liked_listings, })
+                                                      'user_listings': user_listings, })
