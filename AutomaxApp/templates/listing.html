@@ -27,20 +27,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $("#sendEmail").click(function () {
-        $.ajax({
-            type: "POST",
-            url: "{% url 'inquire_listing' 'id=listing.id' %}",
-            data: { 'csrfmiddlewaretoken': '{{ csrf_token }}' },
-            dataType: "json",
-            success: function (r) {
-                alert("Email sent successfully!")
-            },
-            error: function (rs, e) {
-                alert(rs.info)
-            }
-        })
-    });
-</script>

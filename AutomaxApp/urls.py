@@ -7,5 +7,4 @@ urlpatterns = [
     path("list/", views.list_form, name="list_form"),
     path("carinfo/<str:id>", views.carinfo, name="carinfo"),
     path("carinfo/<str:id>/edit/", views.edit, name="edit"),
-    path('listing/<str:id>/inquire/',views.inquire_listing_using_email, name='inquire_listing'),
 ]
