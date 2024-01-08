@@ -15,7 +15,9 @@ CAR_BRANDS = (
     ('chevrolet', 'Chevrolet'),
     ('porsche', 'Porsche'),
     ("golf", "Golf"),
-    ("lexus", "Lexus")
+    ("lexus", "Lexus"),
+    ("dodge", "Dodge"),
+    ("mazda", "Mazda")
 )
 
 TRANSMISSION = (
